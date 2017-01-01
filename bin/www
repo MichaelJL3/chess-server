@@ -1,0 +1,204 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('final-project:server');
+var http = require('http');
+var mongoose = require('mongoose');
+var Board = mongoose.model('Board');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+var io = require('socket.io')(server);
+var timers = [];
+
+loadTimers(timers);
+
+io.on('connection', function(socket){
+  socket.on('join', function(id){
+    console.log(id, 'joined');
+    socket.join(id);
+  });
+  socket.on('swapPiece', function(data){
+    var id=data.id;
+    var send={pos:data.pos, mv:data.mv};
+    socket.to(id).broadcast.emit('swaped', send);
+    clearInterval(timers[id]);
+    timers[id]=setInterval(timeEvent.bind(data), data.time);
+  });
+  socket.on('killPiece', function(data){
+    var id=data.id;
+    var send={pos:data.pos, mv:data.mv};
+    socket.to(id).broadcast.emit('killed', send);
+    clearInterval(timers[id]);
+    timers[id]=setInterval(timeEvent.bind(data), data.time);
+  });
+  socket.on('pawnEndKilled', function(data){
+    var id=data.id;
+    var send={pos:data.pos, mv:data.mv};
+    socket.to(id).broadcast.emit('pawnEndKilled', send);
+  });
+  socket.on('pawnEndSwapped', function(data){
+    var id=data.id;
+    var send={pos:data.pos, mv:data.mv};
+    socket.to(id).broadcast.emit('pawnEndSwapped', send);
+  });
+  socket.on('revive', function(data){
+    var id=data.id;
+    var send={piece:data.piece, pieceCode:data.pieceCode, mv:data.mv};
+    socket.to(id).broadcast.emit('revive', send);
+    clearInterval(timers[id]);
+    timers[id]=setInterval(timeEvent.bind(data), data.time);
+  });
+  socket.on('noSwap', function(data){
+    socket.to(data.id).broadcase.emit('swap');
+    clearInterval(timers[id]);
+    timers[id]=setInterval(timeEvent.bind(data), data.time);
+  });
+  socket.on('starting', function(data){
+    var id=data.id;
+    data.turn='white';
+    io.to(id).emit('gamestart', {id:id});
+    io.to(id).emit('start');
+    timers[id]=setInterval(timeEvent.bind(data), data.time);
+  });
+  socket.on('quit', function(id){
+    clearInterval(timers[id]);
+    timers[id]=undefined;
+    socket.to(id).broadcast.emit('quit');
+  });
+  socket.on('winner', function(id){
+    socket.to(id).broadcast.emit('loser');
+    clearInterval(timers[id]);
+    timers[id]=undefined;
+  });
+  socket.on('disconnect', function(){
+    console.log('disconnect', socket.id);
+    socket.emit('lockout');
+  });
+});
+
+function correctTimes(){
+
+}
+
+function timeEvent(){
+  this.turn=((this.turn==='black')?'white':'black');
+  io.to(this.id).emit('timedout', this.turn);
+  Board.findOneAndUpdate({ _id: this.id }, 
+    {$set: {turn: this.turn, relTime: Date.parse(new Date())}}, 
+    function(err){
+      if(err)
+        console.log(err.errors);
+  });
+}
+
+function loadTimers(){
+	var data;
+	var timeMs;
+	var timeShift;
+	var lastRelTime;
+
+	Board.find({}, function(err, game){
+		if(err)
+			console.log(err.errors);
+
+		game.forEach(function(args){
+			timeMs=args.timed*1000;
+			data={turn: args.turn, id: args._id};
+			timers[args._id]=setInterval(timeEvent.bind(data), timeMs);
+			
+			timeShift=(Date.parse(new Date())-args.relTime)%timeMs;
+			lastRelTime=(timeMs*timeShift)+args.relTime;
+			console.log(timeShift, lastRelTime);
+			Board.findOneAndUpdate(
+				{_id: args._id}, 
+				{$set: {relTime: lastRelTime}},
+				function(err){
+				if(err)
+					console.log(err.errors);
+			});
+		});
+	});
+}
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

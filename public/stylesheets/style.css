@@ -1,0 +1,147 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.navbar{
+	margin-bottom: 0px;
+}
+
+.tempcontainer{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    perspective: 1000px;
+}
+
+#shards{
+    opacity: .4;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+#shards figure{
+    margin: 0;
+    width: 33%;
+    height: 33%;
+    border: 2px solid black;
+    display: block;
+    position: absolute;
+}
+
+#shards .sideA{ 
+    background-color: red;
+    transform: rotateY( 0deg ) rotateZ( 10deg ) translateZ( 100px ); 
+}
+#shards .sideB{
+    background-color: blue;
+    transform: rotateX( 180deg ) rotateY( 25deg ) rotateZ( 10deg ) translateZ( 100px );
+}
+#shards .sideC{ 
+    background-color: green;
+    transform: rotateY( 45deg ) rotateX(-20deg) translateZ( 100px ); 
+}
+
+.container{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    perspective: 1000px;
+}
+
+#cube{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+#cube figure{
+    margin: 0;
+    width: 196px;
+    height: 196px;
+    display: block;
+    position: absolute;
+    border: 2px solid black;
+}
+
+#cube .front{ transform: rotateY( 0deg ) translateZ( 100px ); }
+#cube .back{ transform: rotateX( 180deg ) translateZ( 100px ); }
+#cube .right{ transform: rotateY( 90deg ) translateZ( 100px ); }
+#cube .left{ transform: rotateY( -90deg ) translateZ( 100px ); }
+#cube .top{ transform: rotateX( 90deg ) translateZ( 100px ); }
+#cube .bottom{ transform: rotateX( -90deg ) translateZ( 100px ); }
+
+#rect{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    -webkit-transition: transform 1s ease;
+}
+
+#rect figure{
+    opacity: 0.3;
+    margin: 0;
+    display: block;
+    position: absolute;
+    border: 2px solid black;
+}
+
+#rect .front, #rect .back{
+    height: 196px;
+    width: 196px;
+}
+
+#rect .top, #rect .bottom{
+    height: 96px;
+    width: 196px;
+    top: 50px;
+}
+
+#rect .left, #rect .right{
+    width: 96px;
+    height: 196px;
+    left: 50px;
+}
+
+#rect .front{ 
+    background-color: red;
+    transform: rotateY( 0deg ) translateZ( 50px ); 
+}
+
+#rect .back{ 
+    background-color: blue;
+    transform: rotateX( 180deg ) translateZ( 50px );
+}
+
+#rect .right{ 
+    background-color: green;
+    transform: rotateY( 90deg ) translateZ( 100px ); 
+}
+
+#rect .left{
+    background-color: yellow;
+    transform: rotateY( -90deg ) translateZ( 100px ); 
+}
+
+#rect .top{
+    background-color: purple;
+    transform: rotateX( 90deg ) translateZ( 100px ); 
+}
+
+#rect .bottom{ 
+    background-color: orange;
+    transform: rotateX( -90deg ) translateZ( 100px ); 
+}

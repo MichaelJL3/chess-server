@@ -1,0 +1,62 @@
+
+/* STYLES FOR MAIN DISPLAY*/
+.fullHeight{
+  height: 100%;
+}
+.customBox {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #B3FFDA, #0088CC);
+}
+.sidemenu {
+  z-index: 2;
+  margin-top: 10px;
+  background-color: #5B83AD;
+  border: solid 2px black;
+  border-radius: 5px;
+}
+.features {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+.sliders{
+  color: white;
+  width: 100%;
+  position: relative;
+  background-color: #309BD1;
+}
+.ranks {
+  color: white;
+  width: 100%;
+  display: block;
+  position: relative;
+  background-color: #367391;
+}
+.pbody{
+  position: absolute;
+  color: white;
+  padding: 2px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  background-color: #309BD1;
+  border: 1px solid white;
+}
+.centered{
+  text-align: center;
+}
+#container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#mainComponent {
+  overflow-y: scroll;
+  margin-top: 10px;
+  height: 95%;
+  background: white;
+  background: linear-gradient(to bottom right, white, #999999);
+  border: solid 2px black;
+  border-radius: 4px;
+  position: relative;
+}

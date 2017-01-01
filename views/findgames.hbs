@@ -1,0 +1,35 @@
+
+<div id="container">
+	<div>
+		<ul style="color: red; font-weight: bold">
+		{{#each error}}
+		  <li>{{this}}</li>
+		{{/each}}
+		</ul>
+	</div>
+
+	<p class="centered">Game Search</p>
+
+	{{#if board}}
+		<ul class="list-group">
+		{{#each board}}
+			<li class="list-group-item">
+				<a onclick="joinGame('{{_id}}', {{#if black}}'white'{{else}}'black'{{/if}}, '{{../username}}', '{{timed}}')">Game {{_id}}</a>
+				<br>
+				move time: {{timed}}m
+				<br>
+				play as: <ico class="glyphicon glyphicon-king {{#if black}}white{{else}}black{{/if}}"></ico>
+				<br>
+				game Expires on: 
+				<br>
+				{{timeOut}}
+			</li>
+		{{/each}}
+	{{else}}
+		<p>Nothing was found:</p>
+		<ul>
+			<li><p>Refine your search</p></li>
+			<li><p>Create a new game</p></li>
+		</ul>
+	{{/if}}
+</div>

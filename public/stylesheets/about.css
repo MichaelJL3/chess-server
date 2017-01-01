@@ -1,0 +1,68 @@
+.fullBox{
+	height: 100%;
+	width: 100%;
+}
+
+.box{
+	margin-left: 15px; 
+	margin-right: 15px; 
+	border: solid 2px black; 
+	border-radius: 10px; 
+	padding-left: 10px; 
+	padding-right: 10px; 
+	text-align: center
+}
+
+.rules{ 
+	position: relative;
+	text-align: center;
+	padding: 30px;
+}
+
+.listRule{
+	position: relative;
+	font-size: 20px;
+	padding: 15px;
+}
+
+.pieces{
+	text-align: center;
+	font-size: 50px;
+}
+
+.Bpiece{
+	position: relative;
+	font-size: 40px;
+	color: white;
+	background-color: #333333;
+}
+
+.Wpiece{
+	position: relative;
+	font-size: 40px;	
+	color: #333333;
+	background-color: #EEEEEE;
+}
+
+.description{
+	font-size: 15px;
+	z-index: 10;
+	background-color: #333333;
+	color: white;
+	position: absolute;
+	top: -150px;
+	text-align: left;
+	border: solid 2px #333333;
+	border-radius: 10px;
+}
+
+.header{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.mainContainer{
+	overflow: hidden;
+	position: relative;
+	height: 85%;
+}

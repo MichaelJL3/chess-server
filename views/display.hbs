@@ -1,0 +1,105 @@
+
+<!--change main components height on resize-->
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/display.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/game.css" />
+<script src="/javascripts/display.js"></script>
+<script src="/javascripts/ajax.js"></script>
+<script src="/javascripts/socket.js"></script>
+
+<div class="customBox">
+	<div class="col-xs-12 col-sm-9 col-md-9 fullHeight">
+		<div id="mainComponent">
+		</div>
+	</div>
+
+	<ul class="col-xs-12 col-sm-3 col-md-3 list-group sidemenu">
+		<!--searching-->
+		<div class="features">
+			<li class="list-group-item list-group-item sliders">
+				<h4 class="list-group-item-heading">
+				Search
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</h4>
+			</li>
+			<div class="list-group-item-text pbody">
+				<form id="search" onsubmit="findGame(this.time.value, this.color.value, '{{username}}'); return false;">
+					<h4>Move Duration:</h4>
+					<input type="radio" name="time">Any<br>
+					<input type="radio" name="time" value="60">1min<br>
+					<input type="radio" name="time" value="300">5min<br>
+					<input type="radio" name="time" value="600">10min<br>
+					<input type="radio" name="time" value="1800">30min<br>
+					<input type="radio" name="time" value="3600">1hour<br>
+					<input type="radio" name="time" value="21600">6hours<br>
+					<h4>Piece Color:</h4>
+					<input type="radio" name="color" value="black">Black
+					<input type="radio" name="color" value="white">White
+					<br>
+					<br>
+					<input type="submit" value="submit" name="submit" class="btn btn-primary btn-lg">
+				</form>
+			</div>
+		</div>
+
+		<!--create game-->
+		<div class="features">
+			<li class="list-group-item list-group-item sliders">
+				<h4 class="list-group-item-heading">
+				Create
+					<span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+				</h4>
+			</li>
+			<div class="list-group-item-text pbody">
+				<form id="create" onsubmit="createGame(this.time.value, this.color.value, '{{username}}'); return false;">
+					<h4>Move Duration:</h4>
+					<input type="radio" name="time" value="60">1min<br>
+					<input type="radio" name="time" value="300" checked="checked">5min (Default)<br>
+					<input type="radio" name="time" value="600">10min<br>
+					<input type="radio" name="time" value="1800">30min<br>
+					<input type="radio" name="time" value="3600">1hour<br>
+					<input type="radio" name="time" value="21600">6hours<br>
+					<h4>Piece Color:</h4>
+					<input type="radio" name="color" value="black">Black
+					<input type="radio" name="color" value="white" checked="checked">White (Default)
+					<br>
+					<br>
+					<input type="submit" value="submit" name="submit" class="btn btn-primary btn-lg">
+				</form>
+			</div>
+		</div>
+
+		<!--settings-->
+		<div class="features">
+			<li class="list-group-item list-group-item sliders">
+				<h4 class="list-group-item-heading">
+				Settings 
+					<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+				</h4>
+			</li>
+			<div class="list-group-item-text pbody">
+			</div>
+		</div>
+
+		<!--top 10 rankings-->
+		<li class="list-group-item list-group-item ranks">
+			<h4 class="list-group-item-heading">
+			Ranks
+				<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+			</h4>
+		</li>
+		{{#each ranks}}
+		<li class="list-group-item list-group-item-info ranks">
+			<h4 class="list-group-item-heading">
+			{{this}}
+			</h4>
+			<div class="list-group-item-text">
+			</div>
+		</li>
+		{{/each}}
+	</ul>
+</div>
+
+<script>
+getGames('{{username}}');
+</script>

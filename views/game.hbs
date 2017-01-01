@@ -1,0 +1,52 @@
+
+<div id="container">
+	<div>
+		<ul style="color: red; font-weight: bold">
+		{{#each error}}
+		  <li>{{this}}</li>
+		{{/each}}
+		</ul>
+	</div>
+
+	<p>Game {{_id}}</p>
+
+	{{#if game}}
+		<div>
+			<button id="gameStats" class="btn btn-primary btn-lg">Game Details</button>
+			<button id="quit" class="btn btn-danger btn-lg">Forfeit</button>
+			<button id="clock" class="btn btn-info btn-lg">N/A</button>
+			<div id="gameStatsBox">
+				move time: <timed>{{game.timed}}</timed>s
+				<br>
+				player is: <ico class="glyphicon glyphicon-king {{game.player}}"> {{game.player}}</ico>
+				<br>
+				game Expires on: 
+				<br>
+				{{game.timeOut}}
+				<br>
+				Turn: 
+				<turn>{{game.turn}}</turn>
+				<br>
+				Status:
+				{{#if game.active}}
+					<state class="active">Active</state>
+				{{else}}
+					<state class="notactive">Not Started</state>
+				{{/if}}
+				<br>
+			</div>
+		</div>
+		<div id="board">
+		{{#each game.board}}
+			{{#if this}}
+				<piece class="{{this}} glyphicon"></piece>
+			{{else}}
+				<piece></piece>
+			{{/if}}
+		{{/each}}
+		</div>
+		<br>
+	{{else}}
+		<p>No game with ID: {{_id}} found</p>
+	{{/if}}
+</div>

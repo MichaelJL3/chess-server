@@ -1,0 +1,171 @@
+
+/* STYLES FOR GAME PLAY (SINGLE BOARD)*/
+
+#gameStatsBox{
+  font-weight: bold;
+  background: rgba(100,200,100,0.3);
+  margin: auto;
+  width: 95%;
+  margin-bottom: 10px;
+}
+#gameStats{
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+#quit{
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+#clock{
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+#board{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#board > table{
+  margin: auto;
+  text-align: center;
+  border: solid 2px black;
+  box-shadow: 3px 3px 2px #555555;
+  width: 95%;
+  font-size: 20px;
+}
+#board > table > tr > td{
+  padding-top: 12%;
+  padding-left: 12%;
+  position: relative;
+}
+#board .black, #board .white{
+  font-size: 5vw;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 30%;
+  width: 100%;
+}
+#winner{
+  font-weight: bold;
+  font-size: 30px;
+  color: #33EE33;
+  text-align: center;
+}
+#loser{
+  font-weight: bold;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+}
+.highlight{
+  box-shadow: 0 0 0 2px black inset;
+  background: #00FF00 !important;
+  opacity: 0.3;
+}
+.highlight-enemy{
+  box-shadow: 0 0 0 2px black inset;
+  background: red !important;
+  opacity: 0.3;
+}
+
+/* STYLES FOR DISPLAYING BOARDS */
+
+.board > table{
+  text-align: center;
+  border: solid 2px black;
+  box-shadow: 3px 3px 2px #555555;
+  font-size: 20px;
+}
+.board > table > tr > td{
+  width: 30px;
+  height: 30px;
+}
+.board > table{
+  text-align: center;
+  border: solid 2px black;
+  box-shadow: 3px 3px 2px #555555;
+  font-size: 20px;
+}
+.board > table > tr > td{
+  width: 30px;
+  height: 30px;
+}
+.active{
+  color: green;
+}
+.notactive{
+  color: red;
+}
+.whiteTile{
+  background-color: white;
+  background: linear-gradient(to bottom right, white, #EFEFEF); /* Standard syntax */
+}
+.blackTile{
+  background: black;
+  background: linear-gradient(to bottom right, black, #555555); /* Standard syntax */
+}
+.white{
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.black{
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+p{
+  color: #333333;
+  font-size: 22px;
+  font-weight: bold;
+  text-shadow: 1px 1px #EEEEEE;
+}
+#dead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 0%;
+  width: 100%;
+  height: 30%;
+  background: rgba(0,0,0,0.5);
+  z-index: 10;
+}
+#dead .black, #dead .white{
+  font-size: 5vw;
+  position: relative;
+  z-index: 1;
+  left: 0;
+  top: 30%;
+  width: 100%;
+}
+#dead > table{
+  margin: auto;
+  text-align: center;
+  width: 95%;
+  font-size: 20px;
+}
+#dead > table > tr > td{
+  padding-top: 12%;
+  padding-left: 12%;
+  position: relative;
+}
+#overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  font-weight: bold;
+  font-size: 40px;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 30%;
+  background: rgba(0,0,0,0.5);
+  z-index: 10;
+}
+.defeat{
+  box-shadow: 0 0 0 2px red inset;
+  background: #FF0000 !important;
+  opacity: 0.3;
+}

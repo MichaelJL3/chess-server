@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/auth.css" />
+
+<div class="container">
+	<div class="spacing-top">
+	  <a href="/"><p>Ironthrone - Sign In!</p></a>
+	</div>
+
+	<div>
+	<ul style="list-style-position: inside; font-size: 20px; color: red; font-weight: bold; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+	{{#each error}}
+	  <li>{{this}}</li>
+	{{/each}}
+	</ul>
+	</div>
+
+	<form class="form-group" method="POST" action="">
+	  <br>
+	  <input class="form-control" type="text" id="txtBox" name="username" placeholder="username">
+	  <input class="form-control" type="password" id="txtBox" name="password" placeholder="password">
+	  <br>
+	  <input class="btn btn-primary btn-lg" type="submit" name="submit" value="login">
+	</form>
+
+	<br>
+
+	<div>
+	  <p>Click Here To Create An Account</p>
+	  <a href="/register"><button class="btn btn-primary btn-lg">Register</button></a>
+	</div>
+</div>

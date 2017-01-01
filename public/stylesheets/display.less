@@ -1,0 +1,40 @@
+@background_color: #5B83AD;
+@gradient1: #B3FFDA;
+@gradient2: #0088CC;
+@listColor: #309BD1;
+@rankColor: #367391;
+
+.customBox{
+  margin-top: -20px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, @gradient1, @gradient2);
+}
+
+.mainComponent{
+  margin-top: 20px;
+  height: 95%;
+  background-color: white;
+  border: solid 2px black;
+  border-radius: 10px;
+}
+
+.sidemenu{
+  margin-top: 20px;
+  background-color: @background_color;
+  border: solid 2px black;
+  border-radius: 5px;
+}
+
+.features {
+  color: white;
+  width: 100%;
+  display: block;
+  position: relative;
+  background-color: @listColor;
+}
+
+.ranks{
+  .features;
+  background-color: @rankColor;
+}
